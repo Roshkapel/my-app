@@ -6,9 +6,10 @@ import Dropdown from 'react-dropdown';
 import { YAxis } from "../SalesAnalysis/Y-Axis";
 import { Marks } from "../SalesAnalysis/Marks";
 import { MenuBar } from "../SalesAnalysis/MenuBar";
-import { CsvData } from "../SalesAnalysis/CsvData";
+import { CsvData } from "../SalesAnalysis/CsvData.js";
+import { Users } from "../SalesAnalysis/salesInfo";
 
-
+// import { SearchBar } from "../SalesAnalysis/Search";
 // import { SearchBar } from "../SalesAnalysis/Search";
 // import { FeatureBox } from "../SalesAnalysis/FeatureBox";
 // import { SearchRes } from "../SalesAnalysis/SearchRes";
@@ -25,8 +26,7 @@ const innerWidth = width - margin.left -  margin.right;
 
 const xAxisLabelOffset = 30; //SET A NEW VARIABLE TO MANIPULATE X-AXIS
 const yAxisLabelOffset = 320;
-const icon ='search'
-const placeholder='Search...'
+
 
 const fadeOpacity = 0.2;
 
@@ -50,9 +50,11 @@ const getLabel = value => {
 
 
 const App = () => { 
-  const data = useData();         
+  const data = useData();  
+
+  console.log(data)
+      
   const [hoveredValue, setHoveredValue] = useState(null);
-  
   //Logic for X (MENU)
   const initialXAttribute = 'Revenue 2023';
   const [xAttribute, setXAttribute] = useState(initialXAttribute);
@@ -63,10 +65,7 @@ const App = () => {
   const initialYAttribute = 'Trading As';
   const [yAttribute, setYAttribute] = useState(initialYAttribute);
   const yValue = d => d[yAttribute];
-  const yAxisLabel = getLabel(yAttribute);
-
-  const [results, setResults] = useState([]);
-  
+  const yAxisLabel = getLabel(yAttribute);  
  
   if(!data) {
     return <pre>Loading...</pre>

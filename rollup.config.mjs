@@ -2,9 +2,11 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import replace from '@rollup/plugin-replace';
-import nodePolyfills from 'rollup-plugin-polyfill-node';
+import builtins from 'rollup-plugin-node-builtins'
+import externalGlobals from "rollup-plugin-external-globals";
 import css from 'rollup-plugin-css-only';
 import json from '@rollup/plugin-json';
+import globals from 'rollup-plugin-node-globals';
 //import terser from '@rollup/plugin-terser';
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -22,10 +24,12 @@ export default {
       inlineDynamicImports: true},
     
    plugins: [
+      json(),
       nodeResolve({
          extensions: ['.js'],
          resolve: {mainFields: ['module', 'main']},
-         namedExports: { 'papaparse': ['parse']},
+         browser: 'true',
+         preferBuiltins: false
       }),
       babel({
          babelHelpers: 'bundled',
@@ -38,11 +42,13 @@ export default {
          'process.env.NODE_ENV': '"development"'
       }),
       css({output:'bundle.css'}),
-      nodePolyfills({
-         include:null
-      }),
+
+      externalGlobals({}),
+      globals(),
+      builtins()
+
       // terser(),
-      json()
+     
    ],
    
 }

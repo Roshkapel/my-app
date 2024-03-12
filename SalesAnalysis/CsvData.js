@@ -1,10 +1,13 @@
 import React, {useState, useCallback, useEffect} from "react";
-// import Papa from "papaparse";
+import { UploadData } from "./UploadData";
+
 export const CsvData = () => {
 
   const[data, setData] = useState([]);
   const[columnArray, setColumn] = useState([]);
   const[values, setValues] = useState([]);
+
+  const [file, setFile] = useState(null)
   
   const handleFile = (event) => { 
       // eslint-disable-next-line no-undef
@@ -27,6 +30,8 @@ export const CsvData = () => {
   })
 }
 
+
+
   return (
 
       <>
@@ -38,6 +43,7 @@ export const CsvData = () => {
             name='file'
             onChange={handleFile}>
             </input>
+            <UploadData />
         </div>
           <table style={{borderCollapse: "collapse", border: "1px solid black", margin: "5px auto"}}>
             <thead>
@@ -58,7 +64,9 @@ export const CsvData = () => {
               ))}
             </tbody>
           </table>
+   
         </div>
       </>
   )
 }
+
