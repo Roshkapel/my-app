@@ -34,7 +34,12 @@ export default {
       babel({
          babelHelpers: 'bundled',
          "presets": [["@babel/preset-react",{"runtime": "automatic"}]],
-         extensions: ['.js']
+         extensions: ['.js'],
+         "env": {
+            "development" : {
+              "compact": false
+            }
+          }
       }),
       commonjs({}),
       replace({

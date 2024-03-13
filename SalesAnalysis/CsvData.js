@@ -1,5 +1,5 @@
 import React, {useState, useCallback, useEffect} from "react";
-import { UploadData } from "./UploadData";
+import axios from "axios";
 
 export const CsvData = () => {
 
@@ -7,7 +7,40 @@ export const CsvData = () => {
   const[columnArray, setColumn] = useState([]);
   const[values, setValues] = useState([]);
 
-  const [file, setFile] = useState(null)
+  const [file, setFile] = useState(null);
+  const [progress, setProgress] = useState({ started: false, pc:0});
+  const [msg, setMsg] = useState(null)
+
+  function handleUpload(){
+    if(!file){
+      setMsg('no file selected');
+      return;
+    }
+
+    const fd = new FormData();
+    fd.append('file', file);
+  
+    setMsg("Uploading...");
+    setProgress(prevState => {
+      return {...prevState, started: true}
+    })
+    axios.post('http://httpbin.org/post', fd, {
+      onUploadProgress: (progressEvent) => { setProgress(prevState => {
+        return {...prevState, pc: progressEvent.progress * 100}
+      }) },
+      headers: {
+        "Custom-Header": "value",
+      }
+    })
+    .then(res => {
+      setMsg('Uploaded successfully')
+      console.log(res.data);
+    })
+    .catch(err => {
+      setMsg("Upload failed")
+      console.log(err);
+    });
+  }
   
   const handleFile = (event) => { 
       // eslint-disable-next-line no-undef
@@ -24,13 +57,14 @@ export const CsvData = () => {
           valuesArray.push(Object.values(d));
         });
         setData(result.data);
+        setFile(result.data)
         setColumn(columnArray[0]);
         setValues(valuesArray);
+
       }
   })
+
 }
-
-
 
   return (
 
@@ -43,7 +77,9 @@ export const CsvData = () => {
             name='file'
             onChange={handleFile}>
             </input>
-            <UploadData />
+            <button onClick={handleUpload}>Upload</button>
+            { progress.started && <progress max="100" value={progress.pc}></progress>}
+            { msg && <span>{msg}</span>}
         </div>
           <table style={{borderCollapse: "collapse", border: "1px solid black", margin: "5px auto"}}>
             <thead>

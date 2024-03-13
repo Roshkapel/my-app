@@ -9,7 +9,7 @@ import { MenuBar } from "../SalesAnalysis/MenuBar";
 import { CsvData } from "../SalesAnalysis/CsvData.js";
 import { Users } from "../SalesAnalysis/salesInfo";
 
-// import { SearchBar } from "../SalesAnalysis/Search";
+import { SearchBar } from "../SalesAnalysis/Search";
 // import { SearchBar } from "../SalesAnalysis/Search";
 // import { FeatureBox } from "../SalesAnalysis/FeatureBox";
 // import { SearchRes } from "../SalesAnalysis/SearchRes";
@@ -86,7 +86,9 @@ const App = () => {
 <>
     <div className="App">
     <div className="navBar">
+      <SearchBar />
       <MenuBar/>
+      
     </div>
     <CsvData />
     

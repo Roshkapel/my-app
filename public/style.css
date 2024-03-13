@@ -25,6 +25,7 @@ body {
 }
 
 .csvInput {
+  display: flex;
   position:absolute;
   z-index: 99;
   margin-left: 10px;
@@ -325,5 +326,25 @@ footer {
   max-width: 400px;
   overflow-y: scroll;
   overflow-y: scroll;
+}
 
+.myUpload {
+  margin:0;
+}
+
+.search-Container {
+  position: absolute;
+  top: 15px;
+  left: 400px;
+  width: 20%;
+  background-color: #fff;
+  z-index: 99;
+  border-radius: 5em;
+}
+
+.search-Container input[type=text] {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  color: #2c1183;
 }

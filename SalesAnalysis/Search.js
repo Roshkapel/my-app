@@ -1,73 +1,73 @@
-// import { json } from "d3";
-// import React, {useState, useCallback, useEffect} from "react";
-// import {FaSearch} from "react-icons/fa";
-// // import Papa from "papaparse";
-// // import "./Search";
-// const csvData = "https://gist.githubusercontent.com/Roshkapel/624576680ebfb97f01660d9af7a99179/raw/5f954587b95c2373c9c64e8b954125ca68a06549/SalesData.csv";
+import { json } from "d3";
+import React, {useState, useCallback, useEffect} from "react";
 
-// let userData;
+import Papa from "papaparse";
+// import "./Search";
+const csvData = "https://gist.githubusercontent.com/Roshkapel/624576680ebfb97f01660d9af7a99179/raw/5f954587b95c2373c9c64e8b954125ca68a06549/SalesData.csv";
 
-// export const SearchBar = () => {
-//   const [input, setInput] = useState(null); //asigns the input as well as the input we will search for
-//   const salesFigures = [];
-//   const [data, setData] = useState([]);
-//   const [values, setValues] = useState([])
+let userData;
 
-   
-//   const handleCSVData = (data) => {
-//     // Parse CSV data into an array
-//     // eslint-disable-next-line no-undef
-//     Papa.parse(data, {
-//         header: true, // Assumes the first row contains headers
-//         dynamicTyping: true, // Converts numeric values to numbers
-//         complete: function(results) {
-//             // The parsed data is available in results.data
-//             const dataArray = results.data;
+export const SearchBar = ({setResults}) => {
+  const [input, setInput] = useState(null); //asigns the input as well as the input we will search for
+
   
-//             results.data.map((d) => {
-//               salesFigures.push(Object.values(d))
-//             });
+  const handleCSVData = (data) => {
 
+    Papa.parse(data, {
+        header: true, // Assumes the first row contains headers
+        dynamicTyping: true, // Converts numeric values to numbers
+        complete: function(results) {
 
-//             setData(results.data)
-//             setValues(salesFigures)
-//             console.log(salesFigures)
-           
-
-//             // console.log(dataArray);
-//             // Now you can use the dataArray as needed     
-//             // return userData   
-//         }
+            const dataArray = results.data;
+            const newData = JSON.stringify(dataArray);
+            userData = JSON.parse(newData);
+ 
+            return userData   
+        }
        
 
-//     });
-// }
+    });
+}
 
+ 
+fetch(csvData)
+    .then(response => response.text())
+    .then(handleCSVData)
+    .catch(error => console.error('Error fetching CSV file:', error));
 
-//   return (
-//     <div className="menu-bar">
-   
-//     <div className="search-input">  
-//     <FaSearch id="search-icon"/>
-//     <input placeholder="Type to search..."
-//       value={input}
-//       // onChange={(e) => handleChange(e.target.value)}
-//     />
-//     </div>
-//   </div>
-//   )
-// }
+  const fetchData = (value) => {
 
-// //we are using the useState hook to record and analyse what the user enters
-// //whenever the user enters a text we want to be able to fetch data from an external API
-// //for this we will be using fetch in the form of a json API that makes dummy calls
-// //whenever you have an asynchronous function (like using this json fetch with useState) you have to chain a .then on it to a wait response
-// //then we have to convert the response intoa format that javascript can understand.
+      const results = userData.filter((user) => {
+          return ( 
+            user.label.includes("t")
+            );
+      });
+      setResults(results)
+      console.log(results)
+  }
 
+  const handleChange = (value) => {
+    setInput(value)
+    fetchData(value)
+  }
+  return (
 
+      <div className="search-Container">  
+      <input 
+        type="text" 
+        placeholder="Type to search..."
+        value={input}
+        onChange={(e) => handleChange(e.target.value)}
+      >
 
-// //we are using the useState hook to record and analyse what the user enters
-// //whenever the user enters a text we want to be able to fetch data from an external API
-// //for this we will be using fetch in the form of a json API that makes dummy calls
-// //whenever you have an asynchronous function (like using this json fetch with useState) you have to chain a .then on it to a wait response
-// //then we have to convert the response intoa format that javascript can understand.
+        </input>
+      </div>
+  )
+}
+
+//we are using the useState hook to record and analyse what the user enters
+//whenever the user enters a text we want to be able to fetch data from an external API
+//for this we will be using fetch in the form of a json API that makes dummy calls
+//whenever you have an asynchronous function (like using this json fetch with useState) you have to chain a .then on it to a wait response
+//then we have to convert the response intoa format that javascript can understand.
+// "http://httpbin.org/po"
