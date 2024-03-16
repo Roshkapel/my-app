@@ -1,16 +1,22 @@
 import React, {useState, useCallback, useEffect} from "react";
 import axios from "axios";
+import Papa from "papaparse"
 
 export const CsvData = () => {
 
   const[data, setData] = useState([]);
   const[columnArray, setColumn] = useState([]);
   const[values, setValues] = useState([]);
+  const [input, setInput] = useState("");
+
+  const [jsonData, setJsonData] = useState(null);
+  const acceptInput = ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel";
 
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState({ started: false, pc:0});
   const [msg, setMsg] = useState(null)
 
+  
   function handleUpload(){
     if(!file){
       setMsg('no file selected');
@@ -40,11 +46,14 @@ export const CsvData = () => {
       setMsg("Upload failed")
       console.log(err);
     });
+
   }
   
-  const handleFile = (event) => { 
+  const handleFile = (event) => {
+    const csvFile = event.target.files[0];
+ 
       // eslint-disable-next-line no-undef
-      Papa.parse(event.target.files[0], {
+      Papa.parse(csvFile, {
       header: true,
       skipEmptyLines: true,
       // dynamicTyping: true,
@@ -55,32 +64,39 @@ export const CsvData = () => {
         result.data.map((d) => {
           columnArray.push(Object.keys(d));
           valuesArray.push(Object.values(d));
+          setFile({header: d.keys , value: d.values});
+          
         });
+
         setData(result.data);
-        setFile(result.data)
         setColumn(columnArray[0]);
         setValues(valuesArray);
-
-      }
+        
+      }   
+  
   })
+
 
 }
 
   return (
-
+          
       <>
-
+        
         <div className="feature">
         <div className = "csvInput">
           <input 
             type="file"
             name='file'
+            accept = {acceptInput}
             onChange={handleFile}>
             </input>
-            <button onClick={handleUpload}>Upload</button>
+            <div className="upload"><button onClick={handleUpload}>Upload</button></div>
+        </div>
+        <div className="loading">
             { progress.started && <progress max="100" value={progress.pc}></progress>}
             { msg && <span>{msg}</span>}
-        </div>
+            </div>
           <table style={{borderCollapse: "collapse", border: "1px solid black", margin: "5px auto"}}>
             <thead>
               <tr>
@@ -100,7 +116,7 @@ export const CsvData = () => {
               ))}
             </tbody>
           </table>
-   
+          
         </div>
       </>
   )

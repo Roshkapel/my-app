@@ -8,8 +8,8 @@ export const useData = () => {
  
   useEffect(() => {
     const row = d =>{
-      d.Revenue =  +d['Revenue 2023']; ; 
-      return d;
+      d.Revenue =  +d['Revenue 2023'];  
+      return d
      };   
 
     d3.csv(csvUrl, row).then(data => {

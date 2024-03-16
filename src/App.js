@@ -7,7 +7,8 @@ import { YAxis } from "../SalesAnalysis/Y-Axis";
 import { Marks } from "../SalesAnalysis/Marks";
 import { MenuBar } from "../SalesAnalysis/MenuBar";
 import { CsvData } from "../SalesAnalysis/CsvData.js";
-import { Users } from "../SalesAnalysis/salesInfo";
+
+// import { Users } from "../SalesAnalysis/salesInfo";
 
 import { SearchBar } from "../SalesAnalysis/Search";
 // import { SearchBar } from "../SalesAnalysis/Search";
@@ -49,11 +50,13 @@ const getLabel = value => {
 };
 
 
-const App = () => { 
-  const data = useData();  
 
-  console.log(data)
-      
+const App = () => { 
+
+  
+  const data = useData();  
+  const [results, setResults] = useState([])
+
   const [hoveredValue, setHoveredValue] = useState(null);
   //Logic for X (MENU)
   const initialXAttribute = 'Revenue 2023';
@@ -86,7 +89,9 @@ const App = () => {
 <>
     <div className="App">
     <div className="navBar">
-      <SearchBar />
+      <SearchBar 
+        setResults={setResults}
+      />
       <MenuBar/>
       
     </div>

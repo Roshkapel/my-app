@@ -10,7 +10,7 @@ export const MenuBar = ({setResults}) => {
         <li>
         <a title="Menu" href=""><span className="difnav">Menu</span></a>  
           <ul className="dropdown">
-            <li><a href="index.html"><span className="nav">Home</span></a></li>
+            <li><a href="index.html"><span className="nav"></span></a></li>
             <li><a href="organization.html"><span className="nav">Definitions</span></a></li>
             <li><a href="orgChart2.html"><span className="nav">Analysis</span></a></li>
             <li><a href="Mechanistic.html"><span className="nav">Observation</span></a></li>
