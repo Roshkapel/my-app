@@ -37425,10 +37425,21 @@ function FaSearch (props) {
 }
 
 const SearchBar = ({
-  setResults
+  setResults,
+  showAdd
 }) => {
   const [input, setInput] = reactExports.useState(""); //asigns the input as well as the input we will search for
 
+  function addData() {
+    return /*#__PURE__*/jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {
+      children: /*#__PURE__*/jsxRuntimeExports.jsx("div", {
+        className: "feature",
+        children: /*#__PURE__*/jsxRuntimeExports.jsx("h1", {
+          children: "Name"
+        })
+      })
+    });
+  }
   const fetchData = value => {
     fetch("http://httpbin.org/post").then(response => response.json()).then(json => {
       const results = json.filter(user => {
@@ -37456,10 +37467,11 @@ const SearchBar = ({
         className: "data-input",
         children: [/*#__PURE__*/jsxRuntimeExports.jsx("input", {
           type: "text",
-          placeholder: "enter..",
-          onChange: ""
+          placeholder: "enter..."
         }), /*#__PURE__*/jsxRuntimeExports.jsx("button", {
+          id: "shit",
           type: "button",
+          onClick: addData,
           children: "Add"
         })]
       })]

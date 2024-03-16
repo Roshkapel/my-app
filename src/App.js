@@ -7,14 +7,11 @@ import { YAxis } from "../SalesAnalysis/Y-Axis";
 import { Marks } from "../SalesAnalysis/Marks";
 import { MenuBar } from "../SalesAnalysis/MenuBar";
 import { CsvData } from "../SalesAnalysis/CsvData.js";
-
-// import { Users } from "../SalesAnalysis/salesInfo";
-
+import { SalesData } from "../SalesAnalysis/SalesData.js";
+import { SalesReps } from "../SalesAnalysis/SalesReps.js";
+import { SalesAddData } from "../SalesAnalysis/SalesAddData.js";
 import { SearchBar } from "../SalesAnalysis/Search";
-// import { SearchBar } from "../SalesAnalysis/Search";
-// import { FeatureBox } from "../SalesAnalysis/FeatureBox";
-// import { SearchRes } from "../SalesAnalysis/SearchRes";
-// import { Dropdown } from "../SalesAnalysis/dropdown";
+
 
 
 // console.log(d3);

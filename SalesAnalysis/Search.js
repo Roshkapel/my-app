@@ -1,7 +1,6 @@
 import { json } from "d3";
 import React, {useState, useCallback, useEffect} from "react";
-import { CsvData } from "./CsvData";
-
+import { SalesData } from "./SalesData";
 import {FaSearch} from "react-icons/fa";
 import axios from "axios";
 
@@ -10,9 +9,20 @@ const csvData = "https://gist.githubusercontent.com/Roshkapel/624576680ebfb97f01
 
 
 
-export const SearchBar = ({setResults}) => {
+export const SearchBar = ({setResults, showAdd}) => {
   const [input, setInput] = useState(""); //asigns the input as well as the input we will search for
+  
 
+function addData() {
+  return (
+    <>
+      <div className="feature">
+        <h1>Name</h1>
+      </div>
+    </>
+  )
+ 
+}
 
 const fetchData = (value) => {
   fetch("http://httpbin.org/post").then((response) => response.json()).then((json) => {
@@ -34,24 +44,25 @@ const handleChange = (value) => {
 
   <>
         <div className="search-Container">  
-        <div className="search-icon"><FaSearch /></div>
-          <input 
-          type="text" 
-          placeholder="Type to search..."
-          value={input}
-          onChange={(e) => handleChange(e.target.value)}>
-          </input>
+        <div className="search-icon">
+          <FaSearch />
+        </div>
+            <input 
+            type="text" 
+            placeholder="Type to search..."
+            value={input}
+            onChange={(e) => handleChange(e.target.value)}>
+            </input> 
 
-          <div className="data-input">          
-                <input 
-                  type="text"
-                  placeholder="enter.."
-                  onChange="">
-                </input>
-                <button type="button">Add</button>
-            </div>
-        
-      </div>
+            <div className="data-input">
+            <input 
+              type="text" 
+              placeholder="enter..."
+              >
+              </input>  
+              <button id="shit" type="button" onClick={addData}>Add</button>
+            </div> 
+        </div>
   </>
       
   )
