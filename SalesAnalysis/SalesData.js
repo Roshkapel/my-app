@@ -5,19 +5,28 @@ import React, {useState, useCallback, useEffect} from "react";
 export const SalesData = () => {
 
   const users = [
-    {
-      "Sales Rep Name": "Denzie Sinclair",
-      "Trading As": "Jamaica Inn Hotel",
-      "Volumes 2023": 240,
-      "Revenue 2023": 531990.48
+    { 
+      id: 1,
+      name : "Denzie Sinclair",
+      trading: "Jamaica Inn Hotel",
+      volumes: 240,
+      Revenue: 531990.48
     },
     {
-      "Sales Rep Name": "Jhannel Townsend",
-      "Trading As": "Sampars Cash & Carry",
-      "Volumes 2023": 50,
-      "Revenue 2023": 350230.48
+      id: 2,
+      name: "Jhannel Townsend",
+      trading: "Sampars Cash & Carry",
+      volumes: 50,
+      Revenue: 350230.48
     }
   ]
+
+  for(let i= 0; i < users.length; i++)
+     {
+      users[i].id = i + 1
+     }
+   
+
   return users
 }
   

@@ -3,17 +3,27 @@ import React, {useState, useCallback, useEffect} from "react";
 import { SalesData } from "./SalesData";
 import {FaSearch} from "react-icons/fa";
 import axios from "axios";
-import SalesAddData from "../SalesAnalysis/SalesAddData.js"
+import SalesAddData from "../SalesAnalysis/SalesAddData.js";
+import { SalesReps } from "./SalesReps.js";
 
 // import "./Search";
 const csvData = "https://gist.githubusercontent.com/Roshkapel/624576680ebfb97f01660d9af7a99179/raw/5f954587b95c2373c9c64e8b954125ca68a06549/SalesData.csv";
 
 
 
-export const SearchBar = ({setResults}) => {
+export const SearchBar = ({setResults, userData}) => {
   const [input, setInput] = useState(""); //asigns the input as well as the input we will search for
 
   const [show, setShow] = useState(false);
+  const [showRecents,setShowRecents] = useState(false)
+
+  const viewRecents = () => {
+    if (showRecents === false){
+      setShowRecents(true);
+    } else setShowRecents(false);
+  }
+
+
 
   const onShowClick = () => {
     if (show === false){
@@ -40,7 +50,7 @@ const handleChange = (value) => {
 };
 
   return (
-
+   
   <>
         <div className="search-Container">  
         <div className="search-icon">
@@ -60,7 +70,8 @@ const handleChange = (value) => {
               >
               </input>  
               <button onClick={onShowClick} >Add</button>
-              {show &&  <SalesAddData /> }            
+              {show &&  <SalesAddData /> }
+              {/* <SalesReps userData={userData} />  */}
             </div> 
         </div>
   </>

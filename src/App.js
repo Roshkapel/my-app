@@ -52,6 +52,8 @@ const App = () => {
 
   const userData = SalesData();
 
+  const [users, setUsers] = useState([])
+  
   const data = useData();  
   const [results, setResults] = useState([])
 
@@ -91,7 +93,6 @@ const App = () => {
         setResults={setResults}
         userData={userData}
       />
-      {/* <SalesAddData /> */}
       <MenuBar/>
     </div>
     <CsvData />

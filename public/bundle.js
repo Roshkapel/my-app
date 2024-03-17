@@ -37363,49 +37363,80 @@ const CsvData = () => {
 
 const SalesData = () => {
   const users = [{
-    "Sales Rep Name": "Denzie Sinclair",
-    "Trading As": "Jamaica Inn Hotel",
-    "Volumes 2023": 240,
-    "Revenue 2023": 531990.48
+    id: 1,
+    name: "Denzie Sinclair",
+    trading: "Jamaica Inn Hotel",
+    volumes: 240,
+    Revenue: 531990.48
   }, {
-    "Sales Rep Name": "Jhannel Townsend",
-    "Trading As": "Sampars Cash & Carry",
-    "Volumes 2023": 50,
-    "Revenue 2023": 350230.48
+    id: 2,
+    name: "Jhannel Townsend",
+    trading: "Sampars Cash & Carry",
+    volumes: 50,
+    Revenue: 350230.48
   }];
+  for (let i = 0; i < users.length; i++) {
+    users[i].id = i + 1;
+  }
   return users;
 };
 
 class SalesAddData extends React.Component {
+  //using states in class components
+  state = {
+    name: "",
+    trading: "",
+    volumes: null,
+    revenue: null
+  };
+  add = e => {
+    e.preventDefault();
+    if (this.state.name === "" && this.state.trading === "") {
+      alert("Please Enter Data");
+      return;
+    }
+    console.log(this.state);
+  };
   render() {
-    return /*#__PURE__*/jsxRuntimeExports.jsxs("div", {
-      className: "input-data",
-      children: [/*#__PURE__*/jsxRuntimeExports.jsx("span", {
-        className: "add-data-heading",
-        children: /*#__PURE__*/jsxRuntimeExports.jsx("h3", {
-          children: "Add Data"
-        })
-      }), /*#__PURE__*/jsxRuntimeExports.jsxs("form", {
-        children: [/*#__PURE__*/jsxRuntimeExports.jsxs("div", {
-          children: [/*#__PURE__*/jsxRuntimeExports.jsx("label", {
-            children: "Name"
-          }), /*#__PURE__*/jsxRuntimeExports.jsx("input", {
-            type: "text",
-            placeholder: "enter name"
+    return /*#__PURE__*/jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {
+      children: /*#__PURE__*/jsxRuntimeExports.jsxs("div", {
+        className: "input-data",
+        children: [/*#__PURE__*/jsxRuntimeExports.jsx("span", {
+          className: "add-data-heading",
+          children: /*#__PURE__*/jsxRuntimeExports.jsx("h3", {
+            children: "Add Data"
+          })
+        }), /*#__PURE__*/jsxRuntimeExports.jsxs("form", {
+          onSubmit: this.add,
+          children: [/*#__PURE__*/jsxRuntimeExports.jsxs("div", {
+            children: [/*#__PURE__*/jsxRuntimeExports.jsx("label", {
+              children: "Name"
+            }), /*#__PURE__*/jsxRuntimeExports.jsx("input", {
+              type: "text",
+              value: this.state.name,
+              placeholder: "enter name",
+              onChange: e => this.setState({
+                name: e.target.value
+              })
+            })]
+          }), /*#__PURE__*/jsxRuntimeExports.jsxs("div", {
+            children: [/*#__PURE__*/jsxRuntimeExports.jsx("label", {
+              children: "Sale"
+            }), /*#__PURE__*/jsxRuntimeExports.jsx("input", {
+              type: "text",
+              value: this.state.trading,
+              placeholder: "enter data",
+              onChange: e => this.setState({
+                trading: e.target.value
+              })
+            })]
+          }), /*#__PURE__*/jsxRuntimeExports.jsx("button", {
+            className: "add-data-btn",
+            type: "submit",
+            children: "Add"
           })]
-        }), /*#__PURE__*/jsxRuntimeExports.jsxs("div", {
-          children: [/*#__PURE__*/jsxRuntimeExports.jsx("label", {
-            children: "Sale"
-          }), /*#__PURE__*/jsxRuntimeExports.jsx("input", {
-            type: "text",
-            placeholder: "enter data"
-          })]
-        }), /*#__PURE__*/jsxRuntimeExports.jsx("button", {
-          className: "add-data-btn",
-          type: "button",
-          children: "Add"
         })]
-      })]
+      })
     });
   }
 }
@@ -37474,11 +37505,13 @@ function FaSearch (props) {
 }
 
 const SearchBar = ({
-  setResults
+  setResults,
+  userData
 }) => {
   const [input, setInput] = reactExports.useState(""); //asigns the input as well as the input we will search for
 
   const [show, setShow] = reactExports.useState(false);
+  reactExports.useState(false);
   const onShowClick = () => {
     if (show === false) {
       setShow(true);
@@ -37570,6 +37603,7 @@ const getLabel = value => {
 };
 const App = () => {
   const userData = SalesData();
+  reactExports.useState([]);
   const data = useData();
   const [results, setResults] = reactExports.useState([]);
   const [hoveredValue, setHoveredValue] = reactExports.useState(null);
