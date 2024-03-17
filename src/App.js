@@ -9,7 +9,7 @@ import { MenuBar } from "../SalesAnalysis/MenuBar";
 import { CsvData } from "../SalesAnalysis/CsvData.js";
 import { SalesData } from "../SalesAnalysis/SalesData.js";
 import { SalesReps } from "../SalesAnalysis/SalesReps.js";
-import { SalesAddData } from "../SalesAnalysis/SalesAddData.js";
+import SalesAddData from "../SalesAnalysis/SalesAddData.js"
 import { SearchBar } from "../SalesAnalysis/Search";
 
 
@@ -50,7 +50,8 @@ const getLabel = value => {
 
 const App = () => { 
 
-  
+  const userData = SalesData();
+
   const data = useData();  
   const [results, setResults] = useState([])
 
@@ -88,9 +89,10 @@ const App = () => {
     <div className="navBar">
       <SearchBar 
         setResults={setResults}
+        userData={userData}
       />
+      {/* <SalesAddData /> */}
       <MenuBar/>
-      
     </div>
     <CsvData />
     

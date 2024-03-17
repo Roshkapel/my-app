@@ -3,26 +3,25 @@ import React, {useState, useCallback, useEffect} from "react";
 import { SalesData } from "./SalesData";
 import {FaSearch} from "react-icons/fa";
 import axios from "axios";
+import SalesAddData from "../SalesAnalysis/SalesAddData.js"
 
 // import "./Search";
 const csvData = "https://gist.githubusercontent.com/Roshkapel/624576680ebfb97f01660d9af7a99179/raw/5f954587b95c2373c9c64e8b954125ca68a06549/SalesData.csv";
 
 
 
-export const SearchBar = ({setResults, showAdd}) => {
+export const SearchBar = ({setResults}) => {
   const [input, setInput] = useState(""); //asigns the input as well as the input we will search for
-  
 
-function addData() {
-  return (
-    <>
-      <div className="feature">
-        <h1>Name</h1>
-      </div>
-    </>
-  )
- 
-}
+  const [show, setShow] = useState(false);
+
+  const onShowClick = () => {
+    if (show === false){
+      setShow(true);
+    } else setShow(false);
+  }
+
+  
 
 const fetchData = (value) => {
   fetch("http://httpbin.org/post").then((response) => response.json()).then((json) => {
@@ -60,7 +59,8 @@ const handleChange = (value) => {
               placeholder="enter..."
               >
               </input>  
-              <button id="shit" type="button" onClick={addData}>Add</button>
+              <button onClick={onShowClick} >Add</button>
+              {show &&  <SalesAddData /> }            
             </div> 
         </div>
   </>

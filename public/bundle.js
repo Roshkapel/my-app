@@ -37361,6 +37361,55 @@ const CsvData = () => {
   });
 };
 
+const SalesData = () => {
+  const users = [{
+    "Sales Rep Name": "Denzie Sinclair",
+    "Trading As": "Jamaica Inn Hotel",
+    "Volumes 2023": 240,
+    "Revenue 2023": 531990.48
+  }, {
+    "Sales Rep Name": "Jhannel Townsend",
+    "Trading As": "Sampars Cash & Carry",
+    "Volumes 2023": 50,
+    "Revenue 2023": 350230.48
+  }];
+  return users;
+};
+
+class SalesAddData extends React.Component {
+  render() {
+    return /*#__PURE__*/jsxRuntimeExports.jsxs("div", {
+      className: "input-data",
+      children: [/*#__PURE__*/jsxRuntimeExports.jsx("span", {
+        className: "add-data-heading",
+        children: /*#__PURE__*/jsxRuntimeExports.jsx("h3", {
+          children: "Add Data"
+        })
+      }), /*#__PURE__*/jsxRuntimeExports.jsxs("form", {
+        children: [/*#__PURE__*/jsxRuntimeExports.jsxs("div", {
+          children: [/*#__PURE__*/jsxRuntimeExports.jsx("label", {
+            children: "Name"
+          }), /*#__PURE__*/jsxRuntimeExports.jsx("input", {
+            type: "text",
+            placeholder: "enter name"
+          })]
+        }), /*#__PURE__*/jsxRuntimeExports.jsxs("div", {
+          children: [/*#__PURE__*/jsxRuntimeExports.jsx("label", {
+            children: "Sale"
+          }), /*#__PURE__*/jsxRuntimeExports.jsx("input", {
+            type: "text",
+            placeholder: "enter data"
+          })]
+        }), /*#__PURE__*/jsxRuntimeExports.jsx("button", {
+          className: "add-data-btn",
+          type: "button",
+          children: "Add"
+        })]
+      })]
+    });
+  }
+}
+
 var DefaultContext = {
   color: undefined,
   size: undefined,
@@ -37425,21 +37474,16 @@ function FaSearch (props) {
 }
 
 const SearchBar = ({
-  setResults,
-  showAdd
+  setResults
 }) => {
   const [input, setInput] = reactExports.useState(""); //asigns the input as well as the input we will search for
 
-  function addData() {
-    return /*#__PURE__*/jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {
-      children: /*#__PURE__*/jsxRuntimeExports.jsx("div", {
-        className: "feature",
-        children: /*#__PURE__*/jsxRuntimeExports.jsx("h1", {
-          children: "Name"
-        })
-      })
-    });
-  }
+  const [show, setShow] = reactExports.useState(false);
+  const onShowClick = () => {
+    if (show === false) {
+      setShow(true);
+    } else setShow(false);
+  };
   const fetchData = value => {
     fetch("http://httpbin.org/post").then(response => response.json()).then(json => {
       const results = json.filter(user => {
@@ -37469,11 +37513,9 @@ const SearchBar = ({
           type: "text",
           placeholder: "enter..."
         }), /*#__PURE__*/jsxRuntimeExports.jsx("button", {
-          id: "shit",
-          type: "button",
-          onClick: addData,
+          onClick: onShowClick,
           children: "Add"
-        })]
+        }), show && /*#__PURE__*/jsxRuntimeExports.jsx(SalesAddData, {})]
       })]
     })
   });
@@ -37527,6 +37569,7 @@ const getLabel = value => {
   }
 };
 const App = () => {
+  const userData = SalesData();
   const data = useData();
   const [results, setResults] = reactExports.useState([]);
   const [hoveredValue, setHoveredValue] = reactExports.useState(null);
@@ -37554,7 +37597,8 @@ const App = () => {
       children: [/*#__PURE__*/jsxRuntimeExports.jsxs("div", {
         className: "navBar",
         children: [/*#__PURE__*/jsxRuntimeExports.jsx(SearchBar, {
-          setResults: setResults
+          setResults: setResults,
+          userData: userData
         }), /*#__PURE__*/jsxRuntimeExports.jsx(MenuBar, {})]
       }), /*#__PURE__*/jsxRuntimeExports.jsx(CsvData, {}), /*#__PURE__*/jsxRuntimeExports.jsxs("div", {
         className: "newDropdown",

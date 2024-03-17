@@ -26,8 +26,8 @@ body {
 
 .csvInput {
   display: flex;
-  position:absolute;
-  z-index: 99;
+  position:relative;
+  z-index: 9;
   margin-left: 0px;
   top: 10px;
 }
@@ -397,4 +397,27 @@ input:focus{
   background-color: #e2eaf1;
   width: 200px;
 
+}
+
+.input-data {
+    position:absolute;
+    z-index: 999;
+    top: 50px;
+    left: -200px;
+    border: 1px solid blue;
+    box-shadow: 0px 0px 4px rgb(28, 1, 54);
+    width: 500px;
+    background: #fff;
+}
+
+.add-data-heading{
+  color: black;
+  text-align: center;
+}
+
+.add-data-btn {
+  display: flex;
+  margin-left: 450px;
+  margin-bottom: 0px;
+  align-items: baseline;
 }
