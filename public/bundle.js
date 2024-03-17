@@ -37361,24 +37361,71 @@ const CsvData = () => {
   });
 };
 
-const SalesData = () => {
-  const users = [{
-    id: 1,
-    name: "Denzie Sinclair",
-    trading: "Jamaica Inn Hotel",
-    volumes: 240,
-    Revenue: 531990.48
-  }, {
-    id: 2,
-    name: "Jhannel Townsend",
-    trading: "Sampars Cash & Carry",
-    volumes: 50,
-    Revenue: 350230.48
-  }];
-  for (let i = 0; i < users.length; i++) {
-    users[i].id = i + 1;
-  }
-  return users;
+const SalesCardComponent = ({
+  userData,
+  clickHandler,
+  user
+}) => {
+  const {
+    id,
+    name,
+    trading,
+    volumes,
+    revenue
+  } = user;
+  // const renderUserData = userData.map((user) => {
+  //   const id = user.id;
+  //   const name = user.name
+  //   const trading = user.trading
+  //   const volumes = user.volumes
+  //   const revenue = user.revenue
+
+  return /*#__PURE__*/jsxRuntimeExports.jsxs("div", {
+    className: "recently-added",
+    children: [/*#__PURE__*/jsxRuntimeExports.jsx("h4", {
+      children: "Recently Added"
+    }), /*#__PURE__*/jsxRuntimeExports.jsxs("div", {
+      className: "recents",
+      children: [/*#__PURE__*/jsxRuntimeExports.jsx("p", {
+        id: "id",
+        children: id
+      }), /*#__PURE__*/jsxRuntimeExports.jsx("p", {
+        children: name
+      }), /*#__PURE__*/jsxRuntimeExports.jsx("p", {
+        children: trading
+      }), /*#__PURE__*/jsxRuntimeExports.jsx("p", {
+        children: volumes
+      }), /*#__PURE__*/jsxRuntimeExports.jsx("p", {
+        children: revenue
+      }), /*#__PURE__*/jsxRuntimeExports.jsx("button", {
+        onClick: () => clickHandler(user.id),
+        children: "Delete"
+      })]
+    })]
+  }, user.id);
+
+  // return <div>{renderUserData}</div>
+};
+
+const SalesReps = ({
+  userData,
+  removeDataHandler,
+  users
+}) => {
+  const deleteDataHandler = id => {
+    removeDataHandler(id);
+  };
+  const renderUserData = users.map(user => {
+    return /*#__PURE__*/jsxRuntimeExports.jsx(SalesCardComponent, {
+      // userData={userData}
+      removeDataHandler: removeDataHandler,
+      clickHandler: deleteDataHandler,
+      user: user
+    }, user.id);
+  });
+  return /*#__PURE__*/jsxRuntimeExports.jsx("div", {
+    children: renderUserData
+  });
 };
 
 class SalesAddData extends React.Component {
@@ -37391,11 +37438,15 @@ class SalesAddData extends React.Component {
   };
   add = e => {
     e.preventDefault();
-    if (this.state.name === "" && this.state.trading === "") {
+    if (this.state.name === "" || this.state.trading === "") {
       alert("Please Enter Data");
       return;
     }
-    console.log(this.state);
+    this.props.addDataHandler(this.state);
+    this.setState({
+      name: "",
+      trading: ""
+    });
   };
   render() {
     return /*#__PURE__*/jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {
@@ -37506,7 +37557,10 @@ function FaSearch (props) {
 
 const SearchBar = ({
   setResults,
-  userData
+  userData,
+  addDataHandler,
+  removeDataHandler,
+  users
 }) => {
   const [input, setInput] = reactExports.useState(""); //asigns the input as well as the input we will search for
 
@@ -37548,7 +37602,16 @@ const SearchBar = ({
         }), /*#__PURE__*/jsxRuntimeExports.jsx("button", {
           onClick: onShowClick,
           children: "Add"
-        }), show && /*#__PURE__*/jsxRuntimeExports.jsx(SalesAddData, {})]
+        }), show && /*#__PURE__*/jsxRuntimeExports.jsx(SalesAddData, {
+          addDataHandler: addDataHandler
+        }), /*#__PURE__*/jsxRuntimeExports.jsx("div", {
+          children: show && /*#__PURE__*/jsxRuntimeExports.jsx(SalesReps
+          // userData={userData}
+          , {
+            users: users,
+            removeDataHandler: removeDataHandler
+          })
+        })]
       })]
     })
   });
@@ -37560,6 +37623,63 @@ const SearchBar = ({
 //whenever you have an asynchronous function (like using this json fetch with useState) you have to chain a .then on it to a wait response
 //then we have to convert the response intoa format that javascript can understand.
 // "http://httpbin.org/po"
+
+// Unique ID creation requires a high quality random # generator. In the browser we therefore
+// require the crypto API and do not support built-in fallback to lower quality random number
+// generators (like Math.random()).
+let getRandomValues;
+const rnds8 = new Uint8Array(16);
+function rng() {
+  // lazy load so that environments that need to polyfill have a chance to do so
+  if (!getRandomValues) {
+    // getRandomValues needs to be invoked in a context where "this" is a Crypto implementation.
+    getRandomValues = typeof crypto !== 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto);
+    if (!getRandomValues) {
+      throw new Error('crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported');
+    }
+  }
+  return getRandomValues(rnds8);
+}
+
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
+
+const byteToHex = [];
+for (let i = 0; i < 256; ++i) {
+  byteToHex.push((i + 0x100).toString(16).slice(1));
+}
+function unsafeStringify(arr, offset = 0) {
+  // Note: Be careful editing this code!  It's been tuned for performance
+  // and works in ways you may not expect. See https://github.com/uuidjs/uuid/pull/434
+  return byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + '-' + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + '-' + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + '-' + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + '-' + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]];
+}
+
+const randomUUID = typeof crypto !== 'undefined' && crypto.randomUUID && crypto.randomUUID.bind(crypto);
+var native = {
+  randomUUID
+};
+
+function v4(options, buf, offset) {
+  if (native.randomUUID && !buf && !options) {
+    return native.randomUUID();
+  }
+  options = options || {};
+  const rnds = options.random || (options.rng || rng)(); // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+
+  rnds[6] = rnds[6] & 0x0f | 0x40;
+  rnds[8] = rnds[8] & 0x3f | 0x80; // Copy bytes to buffer, if provided
+
+  if (buf) {
+    offset = offset || 0;
+    for (let i = 0; i < 16; ++i) {
+      buf[offset + i] = rnds[i];
+    }
+    return buf;
+  }
+  return unsafeStringify(rnds);
+}
 
 const width = 960;
 const height = 500;
@@ -37602,8 +37722,38 @@ const getLabel = value => {
   }
 };
 const App = () => {
-  const userData = SalesData();
-  reactExports.useState([]);
+  //using LOCAL_STORAGE_KEY as key
+  const LOCAL_STORAGE_KEY = "users";
+
+  // const userData = SalesData();
+  const [users, setUsers] = reactExports.useState([]);
+  const addDataHandler = user => {
+    console.log(user);
+    setUsers([...users, {
+      id: v4(),
+      ...user
+    }]);
+  };
+  const removeDataHandler = id => {
+    const newDataList = users.filter(user => {
+      return user.id !== id;
+    });
+    setUsers(newDataList);
+  };
+
+  //using useEfffect to catch the data entered and store it in the local storage
+  //useEffect essentially helps you your component to respond to changes whether a useState change
+  //a fetch from the server, or user interacting with the page
+  //we have set up useEffects for both storing and retrieving
+
+  reactExports.useEffect(() => {
+    const retrieveSalesData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (retrieveSalesData) setUsers(retrieveSalesData);
+  }, []);
+  //one of the dependencies [getItem] must remain empty else we will have an infimite loop
+  reactExports.useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users));
+  }, [users]);
   const data = useData();
   const [results, setResults] = reactExports.useState([]);
   const [hoveredValue, setHoveredValue] = reactExports.useState(null);
@@ -37631,8 +37781,12 @@ const App = () => {
       children: [/*#__PURE__*/jsxRuntimeExports.jsxs("div", {
         className: "navBar",
         children: [/*#__PURE__*/jsxRuntimeExports.jsx(SearchBar, {
-          setResults: setResults,
-          userData: userData
+          setResults: setResults
+          // userData={userData}
+          ,
+          users: users,
+          addDataHandler: addDataHandler,
+          removeDataHandler: removeDataHandler
         }), /*#__PURE__*/jsxRuntimeExports.jsx(MenuBar, {})]
       }), /*#__PURE__*/jsxRuntimeExports.jsx(CsvData, {}), /*#__PURE__*/jsxRuntimeExports.jsxs("div", {
         className: "newDropdown",

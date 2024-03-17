@@ -14,16 +14,14 @@ import { SalesReps } from "./SalesReps";
 
     add = (e) => {
       e.preventDefault();
-      if(this.state.name === "" && this.state.trading === "" ){
+      if(this.state.name === "" || this.state.trading === "" ){
         alert("Please Enter Data");
         return;
       }
-      console.log(this.state)
+      this.props.addDataHandler(this.state)
       this.setState({ name: "", trading: "" });
     }
 
-   
-     
   render() {
     return (
       <>
@@ -49,7 +47,6 @@ import { SalesReps } from "./SalesReps";
           <button className="add-data-btn" type="submit">Add</button>
         </form>
       </div>
-     
       </>
     );
   }

@@ -11,7 +11,8 @@ import { SalesData } from "../SalesAnalysis/SalesData.js";
 import { SalesReps } from "../SalesAnalysis/SalesReps.js";
 import SalesAddData from "../SalesAnalysis/SalesAddData.js"
 import { SearchBar } from "../SalesAnalysis/Search";
-
+import { v4 as uuidv4 } from 'uuid';
+import { Router, Routes, Route } from "react-router-dom";
 
 
 // console.log(d3);
@@ -50,9 +51,40 @@ const getLabel = value => {
 
 const App = () => { 
 
-  const userData = SalesData();
+   //using LOCAL_STORAGE_KEY as key
+   const LOCAL_STORAGE_KEY = "users";
 
-  const [users, setUsers] = useState([])
+  // const userData = SalesData();
+  const [users, setUsers] = useState([]);
+
+  const addDataHandler = (user) => {
+    console.log(user)
+    setUsers([...users, {id: uuidv4(), ...user}]);
+  };
+
+  const removeDataHandler = (id) => {
+    const newDataList = users.filter((user) => {
+      return user.id !== id;
+    });
+
+    setUsers(newDataList);
+  };
+
+
+
+    //using useEfffect to catch the data entered and store it in the local storage
+    //useEffect essentially helps you your component to respond to changes whether a useState change
+    //a fetch from the server, or user interacting with the page
+    //we have set up useEffects for both storing and retrieving
+
+  useEffect(() => {
+    const retrieveSalesData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if(retrieveSalesData) setUsers(retrieveSalesData);
+  }, []);
+  //one of the dependencies [getItem] must remain empty else we will have an infimite loop
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users))
+  }, [users]);
   
   const data = useData();  
   const [results, setResults] = useState([])
@@ -91,7 +123,10 @@ const App = () => {
     <div className="navBar">
       <SearchBar 
         setResults={setResults}
-        userData={userData}
+        // userData={userData}
+        users={users}
+        addDataHandler={addDataHandler}
+        removeDataHandler={removeDataHandler}
       />
       <MenuBar/>
     </div>

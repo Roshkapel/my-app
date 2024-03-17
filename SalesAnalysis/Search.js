@@ -5,13 +5,14 @@ import {FaSearch} from "react-icons/fa";
 import axios from "axios";
 import SalesAddData from "../SalesAnalysis/SalesAddData.js";
 import { SalesReps } from "./SalesReps.js";
+import { Router, Routes, Route } from "react-router-dom";
 
 // import "./Search";
 const csvData = "https://gist.githubusercontent.com/Roshkapel/624576680ebfb97f01660d9af7a99179/raw/5f954587b95c2373c9c64e8b954125ca68a06549/SalesData.csv";
 
 
 
-export const SearchBar = ({setResults, userData}) => {
+export const SearchBar = ({setResults, userData, addDataHandler, removeDataHandler, users}) => {
   const [input, setInput] = useState(""); //asigns the input as well as the input we will search for
 
   const [show, setShow] = useState(false);
@@ -70,9 +71,16 @@ const handleChange = (value) => {
               >
               </input>  
               <button onClick={onShowClick} >Add</button>
-              {show &&  <SalesAddData /> }
-              {/* <SalesReps userData={userData} />  */}
+              {show &&  <SalesAddData addDataHandler={addDataHandler}/> }
+              <div >
+                {show && <SalesReps 
+                  // userData={userData}
+                  users={users}
+                  removeDataHandler={removeDataHandler}
+                  />  }
+              </div>
             </div> 
+           
         </div>
   </>
       
