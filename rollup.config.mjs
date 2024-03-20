@@ -7,7 +7,8 @@ import externalGlobals from "rollup-plugin-external-globals";
 import css from 'rollup-plugin-css-only';
 import json from '@rollup/plugin-json';
 import globals from 'rollup-plugin-node-globals';
-//import terser from '@rollup/plugin-terser';
+import terser from '@rollup/plugin-terser';
+import copy from 'rollup-plugin-copy';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -18,10 +19,13 @@ export default {
    input: 'src/index.js',
    external: {'react': 'React', 'topojson': 'topojson-client', 'papaparse': 'Papa'},
    output: {
-      file: 'public/bundle.js',
+      file: 'dist/bundle.es.js',
       format: 'es',
       sourcemap: false,
-      inlineDynamicImports: true},
+      inlineDynamicImports: true,
+      entryFileNames: '[name].[hash].js', 
+      chunkFileNames: '[name].[hash].js'
+   },
     
    plugins: [
       json(),
@@ -35,6 +39,10 @@ export default {
          babelHelpers: 'bundled',
          "presets": [["@babel/preset-react",{"runtime": "automatic"}]],
          extensions: ['.js'],
+         exclude: [
+            'node_modules/**', 
+            'src/parties/**' 
+          ],
          "env": {
             "development" : {
               "compact": false
@@ -50,10 +58,14 @@ export default {
 
       externalGlobals({}),
       globals(),
-      builtins()
-
-      // terser(),
-     
+      builtins(),
+      terser(),
+      copy({
+         patterns: [
+           { src: 'public/index.html', dest: 'dist' }, // Copy index.html to output directory
+           // Add other static assets as needed
+         ],
+       }),
    ],
    
 }

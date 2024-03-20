@@ -1,20 +1,20 @@
 import React, {useState, useCallback, useEffect} from "react";
 import * as d3 from "d3";
 import { useData } from "../SalesAnalysis/useData";
-import { AxisBottom } from "../SalesAnalysis/AxisBottom";
+import { AxisBottom } from "../SalesAnalysis/Marks/AxisBottom.js";
 import Dropdown from 'react-dropdown';
-import { YAxis } from "../SalesAnalysis/Y-Axis";
-import { Marks } from "../SalesAnalysis/Marks";
-import { MenuBar } from "../SalesAnalysis/MenuBar";
+import { YAxis } from "../SalesAnalysis/Marks/Y-Axis.js";
+import { Marks } from "../SalesAnalysis/Marks/index.js";
+import { MenuBar } from "../SalesAnalysis/Search/MenuBar.js";
 import { CsvData } from "../SalesAnalysis/CsvData.js";
-import { SalesData } from "../SalesAnalysis/SalesData.js";
-import { SalesReps } from "../SalesAnalysis/SalesReps.js";
-import SalesAddData from "../SalesAnalysis/SalesAddData.js"
-import { SearchBar } from "../SalesAnalysis/Search";
+import { SalesReps } from "../SalesAnalysis/Search/SalesReps.js";
+import SalesAddData from "../SalesAnalysis/Search/SalesAddData.js"
+import { SearchBar } from "../SalesAnalysis/Search/Index.js";
 import { v4 as uuidv4 } from 'uuid';
-import { Router, Routes, Route } from "react-router-dom";
+import { NoMatch } from "../SalesAnalysis/NoMatch.js";
+import {BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-
+// import { SalesData } from "../SalesAnalysis/SalesData.js";
 // console.log(d3);
 
 const width = 960;
@@ -121,17 +121,16 @@ const App = () => {
 <>
     <div className="App">
     <div className="navBar">
-      <SearchBar 
+        <SearchBar 
         setResults={setResults}
         // userData={userData}
         users={users}
         addDataHandler={addDataHandler}
         removeDataHandler={removeDataHandler}
-      />
+      /> 
       <MenuBar/>
     </div>
     <CsvData />
-    
     <div className="newDropdown">          
       <div className="X-Axis">
         <span className="dropdown-label">X-Axis</span>
@@ -185,11 +184,12 @@ const App = () => {
                   data={data} />  
               </g>
             </g>
-
           </svg>
       </div>
       </div>
     </div>
+    {/* <Route path="*" element={<NoMatch/>} /> */}
+  
   </>
    );
 };

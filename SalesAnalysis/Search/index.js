@@ -1,11 +1,10 @@
 import { json } from "d3";
 import React, {useState, useCallback, useEffect} from "react";
-import { SalesData } from "./SalesData";
 import {FaSearch} from "react-icons/fa";
 import axios from "axios";
-import SalesAddData from "../SalesAnalysis/SalesAddData.js";
+import SalesAddData from "./SalesAddData.js";
 import { SalesReps } from "./SalesReps.js";
-import { Router, Routes, Route } from "react-router-dom";
+import { Router, Routes, Route, BrowserRouter } from "react-router-dom";
 
 // import "./Search";
 const csvData = "https://gist.githubusercontent.com/Roshkapel/624576680ebfb97f01660d9af7a99179/raw/5f954587b95c2373c9c64e8b954125ca68a06549/SalesData.csv";
@@ -71,14 +70,14 @@ const handleChange = (value) => {
               >
               </input>  
               <button onClick={onShowClick} >Add</button>
-              {show &&  <SalesAddData addDataHandler={addDataHandler}/> }
-              <div >
+              {show && <SalesAddData addDataHandler={addDataHandler} />}
+               <div >
                 {show && <SalesReps 
                   // userData={userData}
                   users={users}
                   removeDataHandler={removeDataHandler}
                   />  }
-              </div>
+              </div> 
             </div> 
            
         </div>
