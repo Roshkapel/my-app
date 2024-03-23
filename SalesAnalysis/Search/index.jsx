@@ -2,8 +2,8 @@ import { json } from "d3";
 import React, {useState, useCallback, useEffect} from "react";
 import {FaSearch} from "react-icons/fa";
 import axios from "axios";
-import SalesAddData from "./SalesAddData.js";
-import { SalesReps } from "./SalesReps.js";
+import SalesAddData from "./SalesAddData.jsx";
+import { SalesReps } from "./SalesReps.jsx";
 import { Router, Routes, Route, BrowserRouter } from "react-router-dom";
 
 // import "./Search";

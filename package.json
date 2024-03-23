@@ -37,11 +37,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "serve ./public",
-    "build": "rollup -c -w",
-    "dev": "rollup src/index.js -f cjs -d dist",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
   },
   "eslintConfig": {
     "extends": [

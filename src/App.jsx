@@ -1,17 +1,16 @@
 import React, {useState, useCallback, useEffect} from "react";
 import * as d3 from "d3";
-import { useData } from "../SalesAnalysis/useData";
-import { AxisBottom } from "../SalesAnalysis/Marks/AxisBottom.js";
+import { useData } from "../SalesAnalysis/useData.jsx";
+import { AxisBottom } from "../SalesAnalysis/Marks/AxisBottom.jsx";
 import Dropdown from 'react-dropdown';
-import { YAxis } from "../SalesAnalysis/Marks/Y-Axis.js";
-import { Marks } from "../SalesAnalysis/Marks/index.js";
-import { MenuBar } from "../SalesAnalysis/Search/MenuBar.js";
-import { CsvData } from "../SalesAnalysis/CsvData.js";
-import { SalesReps } from "../SalesAnalysis/Search/SalesReps.js";
-import SalesAddData from "../SalesAnalysis/Search/SalesAddData.js"
-import { SearchBar } from "../SalesAnalysis/Search/Index.js";
+import { YAxis } from "../SalesAnalysis/Marks/Y-Axis.jsx";
+import { Marks } from "../SalesAnalysis/Marks/index.jsx";
+import { MenuBar } from "../SalesAnalysis/Search/MenuBar.jsx";
+import { CsvData } from "../SalesAnalysis/CsvData.jsx";
+import { SalesReps } from "../SalesAnalysis/Search/SalesReps.jsx";
+import SalesAddData from "../SalesAnalysis/Search/SalesAddData.jsx";
+import { SearchBar } from "../SalesAnalysis/Search/index.jsx";
 import { v4 as uuidv4 } from 'uuid';
-import { NoMatch } from "../SalesAnalysis/NoMatch.js";
 import {BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // import { SalesData } from "../SalesAnalysis/SalesData.js";
