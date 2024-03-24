@@ -11,7 +11,7 @@ const csvData = "https://gist.githubusercontent.com/Roshkapel/624576680ebfb97f01
 
 
 
-export const SearchBar = ({setResults, userData, addDataHandler, removeDataHandler, users}) => {
+export const SearchBar = ({setResults, addDataHandler, removeDataHandler, users}) => {
   const [input, setInput] = useState(""); //asigns the input as well as the input we will search for
 
   const [show, setShow] = useState(false);
@@ -73,9 +73,9 @@ const handleChange = (value) => {
               {show && <SalesAddData addDataHandler={addDataHandler} />}
                <div >
                 {show && <SalesReps 
-                  // userData={userData}
                   users={users}
                   removeDataHandler={removeDataHandler}
+                  addDataHandler={addDataHandler}
                   />  }
               </div> 
             </div> 

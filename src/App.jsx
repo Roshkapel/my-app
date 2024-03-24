@@ -1,17 +1,18 @@
 import React, {useState, useCallback, useEffect} from "react";
 import * as d3 from "d3";
 import { useData } from "../SalesAnalysis/useData.jsx";
-import { AxisBottom } from "../SalesAnalysis/Marks/AxisBottom.jsx";
+import { AxisBottom } from "../src/routes/Marks/AxisBottom.jsx";
 import Dropdown from 'react-dropdown';
-import { YAxis } from "../SalesAnalysis/Marks/Y-Axis.jsx";
-import { Marks } from "../SalesAnalysis/Marks/index.jsx";
-import { MenuBar } from "../SalesAnalysis/Search/MenuBar.jsx";
+import { YAxis } from "./routes/Marks/Y-Axis.jsx";
+import { Marks } from "./routes/Marks/index.jsx";
+import MenuBar from "./routes/Search/MenuBar.jsx";
 import { CsvData } from "../SalesAnalysis/CsvData.jsx";
-import { SalesReps } from "../SalesAnalysis/Search/SalesReps.jsx";
-import SalesAddData from "../SalesAnalysis/Search/SalesAddData.jsx";
-import { SearchBar } from "../SalesAnalysis/Search/index.jsx";
+import { SalesReps } from "./routes/Search/SalesReps.jsx";
+import SalesAddData from "./routes/Search/SalesAddData.jsx";
+import { SearchBar } from "./routes/Search/index.jsx";
 import { v4 as uuidv4 } from 'uuid';
 import {BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import NavBar from "./routes/NavBar.jsx";
 
 // import { SalesData } from "../SalesAnalysis/SalesData.js";
 // console.log(d3);
@@ -120,14 +121,20 @@ const App = () => {
 <>
     <div className="App">
     <div className="navBar">
-        <SearchBar 
+        {/* <SearchBar 
         setResults={setResults}
         // userData={userData}
         users={users}
         addDataHandler={addDataHandler}
         removeDataHandler={removeDataHandler}
       /> 
-      <MenuBar/>
+      <MenuBar/> */}
+      <NavBar 
+        users={users}
+        setResults={setResults}
+        addDataHandler={addDataHandler}
+        removeDataHandler={removeDataHandler}
+      />
     </div>
     <CsvData />
     <div className="newDropdown">          

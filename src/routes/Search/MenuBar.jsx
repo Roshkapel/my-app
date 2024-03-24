@@ -2,7 +2,7 @@ import { json } from "d3";
 import React, {useState, useCallback, useEffect} from "react";
 
 
-export const MenuBar = ({setResults}) => {
+const MenuBar = ({setResults}) => {
   
   return (
     <div className="Gmenu">
@@ -21,7 +21,9 @@ export const MenuBar = ({setResults}) => {
     </ul>
   </div>
   )
-}
+};
+
+export default MenuBar;
 
 //we are using the useState hook to record and analyse what the user enters
 //whenever the user enters a text we want to be able to fetch data from an external API
