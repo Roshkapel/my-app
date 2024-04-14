@@ -2,9 +2,10 @@ import React, {useState, useCallback, useEffect} from "react";
 
 
 //props is actually a default parameter
-export const SalesCardComponent = ({userData, clickHandler, user}) => {
+export const SalesCardComponent = ({clickHandler, user, updateDataHandler}) => {
  
     const {id, name, trading, volumes, revenue} = user;
+  
   // const renderUserData = userData.map((user) => {
   //   const id = user.id;
   //   const name = user.name
@@ -21,13 +22,18 @@ export const SalesCardComponent = ({userData, clickHandler, user}) => {
           <p>{trading}</p>
           <p>{volumes}</p>
           <p>{revenue}</p>
-          <button onClick={()=> clickHandler(user.id)}>Delete</button>
+          <div>
+            <ul>
+            <li><button onClick={()=> clickHandler(id)}>Delete</button></li>
+            <button onClick={()=> updateDataHandler(id)}>Update</button>
+            </ul>
+          </div>
+
         </div>
       </div>
     );
 
   
   // return <div>{renderUserData}</div>
-    
-  
+     
 }

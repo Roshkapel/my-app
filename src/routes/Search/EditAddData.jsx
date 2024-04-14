@@ -3,18 +3,27 @@ import { SalesReps } from "./SalesReps";
 import { v4 as uuidv4 } from 'uuid';
 
 
- class SalesAddData extends React.Component{
+ class EditAddData extends React.Component{
+  constructor(props) {
+    super(props)
+    const {id, name, trading} = props.location.state.user;
+    this.state = {
+      id: id,
+      name: name,
+      trading: trading,
+    };
+  }
 
 
   //using states in class components
-    state = {
-      id: uuidv4(),
-      name: "",
-      trading: "",
-      volumes: null,
-      revenue: null,
-      show: false
-    };
+    // state = {
+    //   id: uuidv4(),
+    //   name: "",
+    //   trading: "",
+    //   volumes: null,
+    //   revenue: null,
+    //   show: false
+    // };
   
     onShowClick = () => {
       this.setState(prevState => ({show: !prevState.show}));
@@ -22,7 +31,7 @@ import { v4 as uuidv4 } from 'uuid';
     }
   
 
-    add = (e) => {
+    update = (e) => {
       e.preventDefault();//stops refresh
       if(this.state.name === "" || this.state.trading === "" ){
         alert("Please Enter Data");
@@ -35,7 +44,7 @@ import { v4 as uuidv4 } from 'uuid';
       console.log("Data entered:", this.state);
 
       // this.props.addDataHandler({ ...this.state})
-      this.props.addDataHandler(this.state)    
+      this.props.updateDataHandler(this.state)    
       // this.setState({ name: "", trading: "" });
       // this.props.history.push("/");
     }
@@ -46,7 +55,7 @@ import { v4 as uuidv4 } from 'uuid';
           <div> <span className="add-data-heading"><h3>Add Data</h3></span></div>
           <hr />
          <div className="input-data">
-        <form onSubmit={this.add}>
+        <form onSubmit={this.update}>
           <div className="myInput">
            <label>Name:</label>
             <input 
@@ -63,7 +72,7 @@ import { v4 as uuidv4 } from 'uuid';
               placeholder="enter data" 
               onChange={ (e) => this.setState({trading: e.target.value})}/> 
           </div>
-          <button className="add-data-btn" type="submit" >Add</button>
+          <button className="add-data-btn" type="submit" >Update</button>
                <div> 
                 {this.state.show && <SalesReps 
                   key={this.id}
@@ -72,6 +81,7 @@ import { v4 as uuidv4 } from 'uuid';
                   addDataHandler={this.props.addDataHandler}
                   updateDataHandler={this.props.updateDataHandler}
                   />  }
+                 
               </div> 
         </form>
       </div>
@@ -84,4 +94,4 @@ import { v4 as uuidv4 } from 'uuid';
   
 }
 
-export default SalesAddData;
+export default EditAddData;

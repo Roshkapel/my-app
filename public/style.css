@@ -400,15 +400,39 @@ input:focus{
 }
 
 .input-data {
-    position:absolute;
-    z-index: 999;
     top: 50px;
-    left: -300px;
+    height: 300px;
+    margin-left: 400px;
     border: 1px solid blue;
     box-shadow: 0px 0px 4px rgb(28, 1, 54);
     width: 600px;
     background: #fff;
+    align-items: center;
+    
 }
+
+.input-data .myInput {
+  padding: 4px;
+  padding-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  
+}
+
+.input-data .sale-input {
+  margin-left: 22px;
+}
+.myInput input {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  border: .5px solid grey;
+  margin-left: 10px;
+  color:black;
+  align-items: center;
+  width: 50%;
+}
+
+
 
 
 .add-data-heading{
@@ -417,8 +441,10 @@ input:focus{
 }
 
 .add-data-btn {
+  position: fixed;
   display: flex;
-  margin-left: 520px;
+  margin-left: 510px;
+  margin-top: 100px;
   margin-bottom: 0px;
   align-items: baseline;
   color: whitesmoke;
@@ -431,8 +457,10 @@ input:focus{
 
 .recently-added {
   position: absolute;
-  left: -250px;
-  top: 280px;
+  left: 300px;
+  z-index: 999;
+  
+  top: 380px;
   padding-bottom: 10px;
   border: 1px solid rgb(78, 78, 227);
   box-shadow: 0px 0px 4px rgb(105, 107, 216);
@@ -446,6 +474,9 @@ input:focus{
 }
 
 .recents {
+  position: absolute;
+
+
   display: flex;
   font-size: small;
   padding-left: 1em;
@@ -476,4 +507,18 @@ input:focus{
 .shop {
   position: absolute;
   top: 100px;
+}
+
+.showMe {
+  position: absolute;
+  left: 400px;
+  z-index: 999;
+}
+
+.my-box {
+  align-items: center;
+  position: absolute;
+  top: 20px;
+  left: -300px;
+  z-index: 999;
 }

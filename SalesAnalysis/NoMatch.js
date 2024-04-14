@@ -1,7 +1,9 @@
 import React from 'react';
 
-export const NoMatch = () => {
-  return (
-    <div>NPage is Not Found</div>
-  )
+const Addme = ({users, setUsers, addDataHandler, removeDataHandler, updateDataHandler}) => {
+  
+ return users
+ 
 }
+
+export default Addme;

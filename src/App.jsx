@@ -5,14 +5,11 @@ import { AxisBottom } from "../src/routes/Marks/AxisBottom.jsx";
 import Dropdown from 'react-dropdown';
 import { YAxis } from "./routes/Marks/Y-Axis.jsx";
 import { Marks } from "./routes/Marks/index.jsx";
-import MenuBar from "./routes/Search/MenuBar.jsx";
 import { CsvData } from "../SalesAnalysis/CsvData.jsx";
-import { SalesReps } from "./routes/Search/SalesReps.jsx";
-import SalesAddData from "./routes/Search/SalesAddData.jsx";
-import { SearchBar } from "./routes/Search/index.jsx";
 import { v4 as uuidv4 } from 'uuid';
-import {BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./routes/NavBar.jsx";
+import api from "./api/users.js";
+
 
 // import { SalesData } from "../SalesAnalysis/SalesData.js";
 // console.log(d3);
@@ -49,42 +46,63 @@ const getLabel = value => {
 
 
 
-const App = () => { 
+const App = ({addDataHandler, users, removeDataHandler}) => { ;
 
-   //using LOCAL_STORAGE_KEY as key
-   const LOCAL_STORAGE_KEY = "users";
+  //  //using LOCAL_STORAGE_KEY as key
+  //  const LOCAL_STORAGE_KEY = "users";
 
-  // const userData = SalesData();
-  const [users, setUsers] = useState([]);
+  // // const userData = SalesData();
+  // const [users, setUsers] = useState([]);
 
-  const addDataHandler = (user) => {
-    console.log(user)
-    setUsers([...users, {id: uuidv4(), ...user}]);
-  };
+  // //Retrieve Contacts
+  // const retrieveUsers = async () => {
+  //   const response = await api.get("/users");
+  //   return response.data
+  // }
 
-  const removeDataHandler = (id) => {
-    const newDataList = users.filter((user) => {
-      return user.id !== id;
-    });
+  // const addDataHandler = async (user) => {
+  //   console.log('this is user' ,user)
+  //   const request = {
+  //     id: uuidv4(),
+  //     ...users
+  //   }
 
-    setUsers(newDataList);
-  };
+  //   const response = await api.post("/users", request);
+  //   console.log(response)
+  //   setUsers([...users, response.data]);
+  //   // setUsers([...users, {id: uuidv4(), ...user}]);
+  //   // setUsers(prevUsers => [...prevUsers, { id: uuidv4(), ...user }]);
+  // };
 
+  // const removeDataHandler = (id) => {
+  //   const newDataList = users.filter((user) => {
+  //     return users.id !== id;
+  //   });
 
+  //   setUsers(newDataList);
+    
+  // };
 
-    //using useEfffect to catch the data entered and store it in the local storage
-    //useEffect essentially helps you your component to respond to changes whether a useState change
-    //a fetch from the server, or user interacting with the page
-    //we have set up useEffects for both storing and retrieving
+  //   //using useEfffect to catch the data entered and store it in the local storage
+  //   //useEffect essentially helps you your component to respond to changes whether a useState change
+  //   //a fetch from the server, or user interacting with the page
+  //   //we have set up useEffects for both storing and retrieving
 
-  useEffect(() => {
-    const retrieveSalesData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    if(retrieveSalesData) setUsers(retrieveSalesData);
-  }, []);
-  //one of the dependencies [getItem] must remain empty else we will have an infimite loop
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users))
-  }, [users]);
+  // useEffect(() => {
+  //   // const retrieveSalesData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+  //   // if(retrieveSalesData) setUsers(retrieveSalesData);
+  //   const getAllUsers = async () => {
+  //     const allUsers = await retrieveUsers();
+  //     if (allUsers) setUsers(allUsers);
+  //   };
+
+  //   getAllUsers();
+  // }, []);
+  
+  // //one of the dependencies [getItem] must remain empty else we will have an infimite loop
+  // useEffect(() => {
+  //   // localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users))
+  // }, [users]);
   
   const data = useData();  
   const [results, setResults] = useState([])
@@ -118,17 +136,9 @@ const App = () => {
 
   return (
 
-<>
+<>  
     <div className="App">
     <div className="navBar">
-        {/* <SearchBar 
-        setResults={setResults}
-        // userData={userData}
-        users={users}
-        addDataHandler={addDataHandler}
-        removeDataHandler={removeDataHandler}
-      /> 
-      <MenuBar/> */}
       <NavBar 
         users={users}
         setResults={setResults}

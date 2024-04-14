@@ -70,14 +70,14 @@ const handleChange = (value) => {
               >
               </input>  
               <button onClick={onShowClick} >Add</button>
-              {show && <SalesAddData addDataHandler={addDataHandler} />}
-               <div >
+              {/* {show && <SalesAddData addDataHandler={addDataHandler} />}
+               <div className="my-box" >
                 {show && <SalesReps 
                   users={users}
                   removeDataHandler={removeDataHandler}
                   addDataHandler={addDataHandler}
                   />  }
-              </div> 
+              </div>  */}
             </div> 
            
         </div>
