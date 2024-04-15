@@ -408,7 +408,7 @@ input:focus{
     width: 600px;
     background: #fff;
     align-items: center;
-    
+   
 }
 
 .input-data .myInput {
@@ -432,9 +432,6 @@ input:focus{
   width: 50%;
 }
 
-
-
-
 .add-data-heading{
   color: rgb(48, 47, 47);
   text-align: center;
@@ -452,14 +449,29 @@ input:focus{
   border-radius: .2em;
   width: 4em;
   padding-left: .8em;
-
 }
+
+.add-data-btn2 {
+  position: fixed;
+  display: flex;
+  align-items: flex-end;
+  margin-left: 1400px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  float:right;
+  align-items: baseline;
+  color: whitesmoke;
+  background: #2c1183;
+  border-radius: .2em;
+  width: 4em;
+  /* padding-left: .8em; */
+}
+
 
 .recently-added {
   position: absolute;
   left: 300px;
-  z-index: 999;
-  
+  z-index: 999; 
   top: 380px;
   padding-bottom: 10px;
   border: 1px solid rgb(78, 78, 227);

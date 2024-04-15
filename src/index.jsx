@@ -8,7 +8,7 @@ import ErrorPage from './routes/error-page';
 import SalesData from './routes/SalesData';
 import Addme from '../SalesAnalysis/NoMatch';
 import process from '../SalesAnalysis/removeData';
-import { SalesReps } from './routes/Search/SalesReps';
+import SalesForcasting from './routes/Search/SalesForcasting';
 // import * as vega from "vega";
 // import embed from "vega-embed";
 
@@ -27,15 +27,11 @@ const router = createBrowserRouter([
       addDataHandler={Addme}
       updateDataHandler={Addme}
       removeDataHandler={process}
-    />,
-    // children: [
-    //   {
-    //     path: "/sales/:salesId",
-    //     element: <SalesReps 
-    //     users={Addme}
-    //     />
-    //   }
-    // ]
+    />
+  },
+  {
+    path: "/forecast",
+    element: <SalesForcasting />
   }
 ]);
 
