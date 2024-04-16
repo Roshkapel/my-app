@@ -9,6 +9,7 @@ import SalesData from './routes/SalesData';
 import Addme from '../SalesAnalysis/NoMatch';
 import process from '../SalesAnalysis/removeData';
 import SalesForcasting from './routes/Search/SalesForcasting';
+import { UserProfile } from './routes/Search/UserProfile';
 // import * as vega from "vega";
 // import embed from "vega-embed";
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/forecast",
     element: <SalesForcasting />
+  },
+  {
+    path: "/userProfile",
+    element: <UserProfile />
   }
 ]);
 
