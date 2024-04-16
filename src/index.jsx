@@ -9,6 +9,8 @@ import SalesData from './routes/SalesData';
 import Addme from '../SalesAnalysis/NoMatch';
 import process from '../SalesAnalysis/removeData';
 import SalesForcasting from './routes/Search/SalesForcasting';
+import { UserLogin } from './routes/Search/UserLogin';
+import { MainPage } from './routes/Search/MainPage';
 import { UserProfile } from './routes/Search/UserProfile';
 // import * as vega from "vega";
 // import embed from "vega-embed";
@@ -16,11 +18,16 @@ import { UserProfile } from './routes/Search/UserProfile';
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <MainPage
+    />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/charts",
     element: <App 
     addDataHandler={true}
     Addme={Addme}
-    />,
-    errorElement: <ErrorPage />
+    />
   },
   {
     path: "/sales",
@@ -35,7 +42,11 @@ const router = createBrowserRouter([
     element: <SalesForcasting />
   },
   {
-    path: "/userProfile",
+    path: "/login",
+    element: <UserLogin />
+  },
+  {
+    path: "/profile",
     element: <UserProfile />
   }
 ]);
