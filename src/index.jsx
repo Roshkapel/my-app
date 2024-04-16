@@ -12,6 +12,7 @@ import SalesForcasting from './routes/Search/SalesForcasting';
 import { UserLogin } from './routes/Search/UserLogin';
 import { MainPage } from './routes/Search/MainPage';
 import { UserProfile } from './routes/Search/UserProfile';
+import { UserRegister } from './routes/Search/UserRegister';
 // import * as vega from "vega";
 // import embed from "vega-embed";
 
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <UserProfile />
+  },
+  {
+    path: "/register",
+    element: <UserRegister />
   }
 ]);
 

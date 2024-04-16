@@ -9,7 +9,7 @@ export const UserProfile = ({setResults,users}) => {
     const height = 100;
   return (
     <>
-      <UserNav />
+      <HomeNav />
       <MenuBar />
       <div className='profile-box'>
       <div className='side-bar'> 
