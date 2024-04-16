@@ -290,3 +290,16 @@ ul .nav-list {
   padding-left: .5em;
   
 }
+
+.user-profile-table {
+
+    position:absolute;
+    z-index: 9;
+    height: 80vh;
+    width: 75vw;
+    text-align: center;
+    max-width: 100vw;
+    overflow-x: scroll;
+    overflow-y: scroll;
+  }
+  

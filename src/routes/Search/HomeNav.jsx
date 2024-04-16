@@ -11,7 +11,7 @@ export const HomeNav = ({setResults, addDataHandler, removeDataHandler, users}) 
   return (
    
   <>
-      <div className="home-nav">
+      <div className="navBar">
         <ul className="nav-list">
          <li><Link to='/login'>Login</Link></li>
           <li><Link to='/'>Community</Link></li>
