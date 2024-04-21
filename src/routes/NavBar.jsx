@@ -2,7 +2,7 @@ import React from 'react';
 import MenuBar from './Search/MenuBar';
 import { SearchBar } from './Search';
 
-const NavBar = ({setResults, users, addDataHandler, removeDataHandler}) => {
+const NavBar = ({setResults, users, addDataHandler, removeDataHandler, addFunction,subFunction}) => {
   return (
     <div className="navBar">
     <SearchBar 
@@ -10,6 +10,8 @@ const NavBar = ({setResults, users, addDataHandler, removeDataHandler}) => {
       users={users}
       addDataHandler={addDataHandler}
       removeDataHandler={removeDataHandler}
+      addFunction={addFunction}
+      subFunction={subFunction}
   /> 
   <MenuBar/>
 </div>

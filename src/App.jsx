@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useEffect} from "react";
+import React, {useState, useCallback, useEffect, useContext} from "react";
 import * as d3 from "d3";
 import { useData } from "../SalesAnalysis/useData.jsx";
 import { AxisBottom } from "../src/routes/Marks/AxisBottom.jsx";
@@ -7,6 +7,7 @@ import { YAxis } from "./routes/Marks/Y-Axis.jsx";
 import { Marks } from "./routes/Marks/index.jsx";
 import { CsvData } from "../SalesAnalysis/CsvData.jsx";
 import { v4 as uuidv4 } from 'uuid';
+import { ChartButtons } from "../SalesAnalysis/useData.jsx";
 import NavBar from "./routes/NavBar.jsx";
 import api from "./api/users.js";
 
@@ -46,7 +47,7 @@ const getLabel = value => {
 
 
 
-const App = ({addDataHandler, users, removeDataHandler}) => { ;
+const App = ({addDataHandler, users, removeDataHandler, addFunction, subFunction}) => { ;
 
   //  //using LOCAL_STORAGE_KEY as key
   //  const LOCAL_STORAGE_KEY = "users";
@@ -107,6 +108,7 @@ const App = ({addDataHandler, users, removeDataHandler}) => { ;
   const data = useData();  
   const [results, setResults] = useState([])
 
+  
   const [hoveredValue, setHoveredValue] = useState(null);
   //Logic for X (MENU)
   const initialXAttribute = 'Revenue 2023';
@@ -137,6 +139,7 @@ const App = ({addDataHandler, users, removeDataHandler}) => { ;
   return (
 
 <>  
+    
     <div className="App">
     <div className="navBar">
       <NavBar 
@@ -144,6 +147,8 @@ const App = ({addDataHandler, users, removeDataHandler}) => { ;
         setResults={setResults}
         addDataHandler={addDataHandler}
         removeDataHandler={removeDataHandler}
+        addFunction={addFunction}
+        subFunction={subFunction}
       />
     </div>
     <CsvData />
@@ -167,7 +172,9 @@ const App = ({addDataHandler, users, removeDataHandler}) => { ;
             />
         </div>
   </div>
-
+      {/* <ChartButtons 
+      addFunction={addFunction}
+         /> */}
       <div className="four">
         <div className="move">
         <svg width={width} height={height}>

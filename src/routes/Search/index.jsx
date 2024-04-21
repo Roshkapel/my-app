@@ -5,13 +5,14 @@ import axios from "axios";
 import SalesAddData from "./SalesAddData.jsx";
 import { SalesReps } from "./SalesReps.jsx";
 import { Router, Routes, Route, BrowserRouter } from "react-router-dom";
+import { ChartButtons } from "../../../SalesAnalysis/useData.jsx";
 
 // import "./Search";
 const csvData = "https://gist.githubusercontent.com/Roshkapel/624576680ebfb97f01660d9af7a99179/raw/5f954587b95c2373c9c64e8b954125ca68a06549/SalesData.csv";
 
 
 
-export const SearchBar = ({setResults, addDataHandler, removeDataHandler, users}) => {
+export const SearchBar = ({setResults, addDataHandler, removeDataHandler, users, addFunction, subFunction}) => {
   const [input, setInput] = useState(""); //asigns the input as well as the input we will search for
 
   const [show, setShow] = useState(false);
@@ -64,12 +65,13 @@ const handleChange = (value) => {
             </input> 
 
             <div className="data-input">
-            <input 
-              type="text" 
-              placeholder="enter..."
-              >
-              </input>  
-              <button onClick={onShowClick} >Add</button>
+              <div className="chart-component">
+                <ChartButtons 
+                addFunction={addFunction}
+                subFunction={subFunction}
+              />
+              </div>
+              
               {/* {show && <SalesAddData addDataHandler={addDataHandler} />}
                <div className="my-box" >
                 {show && <SalesReps 

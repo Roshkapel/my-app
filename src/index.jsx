@@ -13,6 +13,7 @@ import { UserLogin } from './routes/Search/UserLogin';
 import { MainPage } from './routes/Search/MainPage';
 import { UserProfile } from './routes/Search/UserProfile';
 import { UserRegister } from './routes/Search/UserRegister';
+import MainContent from './routes/Search/MainContent';
 // import * as vega from "vega";
 // import embed from "vega-embed";
 
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/charts",
-    element: <App 
+    element: <MainContent 
     addDataHandler={true}
     Addme={Addme}
     />

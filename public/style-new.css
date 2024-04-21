@@ -54,6 +54,8 @@
   width: 10em;
   height:10em;
   margin-left: 60px;
+  overflow-y: scroll;
+  
 }
 
 .hobbies2 {
@@ -106,6 +108,10 @@ p {
   padding-left: .5em;
 }
 
+.forcast-display h3 {
+  padding-bottom: 10px;
+}
+
 .add-data-btn3 {
   position: relative;
   color: whitesmoke;
@@ -141,6 +147,7 @@ p {
     box-shadow: 0px 0px 4px rgb(28, 1, 54);
     width: 500px;
     height: 500px;
+    max-height: 100vh;
     background: #fff;
     align-items: center;  
 }
@@ -174,7 +181,8 @@ p {
    -3px 0 5px -3px rgb(105, 61, 146),
    3px 0 5px -3px rgb(105, 61, 146);
   width: 90%;
-  height: 55%;
+  min-height: 55%;
+  max-height: 600px;
   background: #fff;
   align-items: center;  
 }
@@ -188,6 +196,7 @@ img {
   padding-left: 1em;
   padding-top: 2em;
   margin-right: 30px;
+  margin-bottom: 0;
 }
 
 .user-input {
@@ -320,6 +329,7 @@ ul .nav-list {
   }
 
   .sign-in-btn {
+    position: relative;
     background-color: #431fb7;
     color: white;
     border-radius: .5em;
@@ -328,6 +338,7 @@ ul .nav-list {
     padding-right: .5em;
     font-size: small;
     margin-left: 6px;
+    margin-top: 10px;
     width: 100%;
   }
 
@@ -340,3 +351,64 @@ ul .nav-list {
     font-size: small;
   }
   
+  .instructions {
+    color: red;
+    margin: 0;
+  }       
+  
+  .errmsg {
+    color: red;
+    margin: 0;
+  }
+
+  .valid {
+    color: green;
+    margin: 0;
+  }   
+  .hide {
+    display: none;
+  } 
+
+  .register-sign-in {
+    margin-top: 25px;
+    padding: 0;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .forcast-data {
+    display: flex;
+    flex-direction: column;
+    position: inherit;
+    font-size: medium;
+    font-weight: bold;
+    font-variant-numeric: lining-nums;
+    text-align: center;
+    overflow-y: hidden;
+   
+  }
+
+  .hobbies h3 {
+    position: relative;
+    border-bottom: 1px solid grey;
+    
+  }
+
+  .add-five-btn {
+    position: absolute;
+    margin-left: -38px;
+  }
+
+  .sub-five-btn {
+    position: absolute;
+    margin-left: -200px;
+  }
+
+  .chart-btn {
+    display: flex;
+  }
+
+  .chart-component {
+    margin-left: 200px;
+  }

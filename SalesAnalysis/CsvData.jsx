@@ -1,6 +1,6 @@
 import React, {useState, useCallback, useEffect} from "react";
 import axios from "axios";
-import Papa from "papaparse"
+import Papa from "papaparse";
 
 export const CsvData = () => {
 

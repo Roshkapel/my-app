@@ -3,14 +3,16 @@ import { HomeNav } from './HomeNav';
 import { UserNav } from './UserNav';
 import MenuBar from './MenuBar';
 import { UserTableData } from './UserTableData';
+import { ProfileNav } from './ProfileNav';
+
+
 export const UserProfile = ({setResults,users}) => {
 
     const width = 100;
     const height = 100;
   return (
     <>
-      <HomeNav />
-      <MenuBar />
+      <ProfileNav />
       <div className='profile-box'>
       <div className='side-bar'> 
         <div className='user-profile'>

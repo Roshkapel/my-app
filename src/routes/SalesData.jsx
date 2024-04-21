@@ -29,7 +29,7 @@ const SalesData = ({setResults, name, trading}) => {
 
     const response = await api.post("/users", request);
     console.log(response)
-    setUsers([...users, response.data]);
+    setUsers([...user, response.data]);
 
   };
 

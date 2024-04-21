@@ -6,7 +6,7 @@ const csvData = "https://gist.githubusercontent.com/Roshkapel/624576680ebfb97f01
 
 
 
-export const HomeNav = ({setResults, addDataHandler, removeDataHandler, users}) => {
+export const ProfileNav = ({setResults, addDataHandler, removeDataHandler, users}) => {
 
   return (
    
@@ -14,9 +14,9 @@ export const HomeNav = ({setResults, addDataHandler, removeDataHandler, users}) 
       <div className="navBar">
         <ul className="nav-list">
          <li><Link to='/login'>Login</Link></li>
-          <li><Link to='/'>Community</Link></li>
-          <li><Link to='/'>News</Link></li>
-          <li><Link to='/profile'>Profile</Link></li>
+          <li><Link to='/forecast'>Forecasts</Link></li>
+          <li><Link to='/sales'>Sales</Link></li>
+          <li><Link to='/charts'>Charts</Link></li>
           <p ><Link to='/' id="closeF">Exit</Link></p>
           {/* <li>Community</li>
           <li>News</li>
